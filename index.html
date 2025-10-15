@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mol計算</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 2rem;
+    background: transparent;
+}
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    padding: 4rem;
+    min-height: calc(100vh - 8rem);
+    display: grid;
+    place-items: center;
+    .home {
+        /* display: none; */
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        div {
+            margin: 1rem;
+            padding-inline: 2rem;
+            padding-bottom: .2rem;
+            border-radius: 100rem;
+            border: solid 2px black;
+        }
+    }
+    .simulator {
+        text-align: center;
+        /* display: grid; */
+        display: none;
+        justify-items: center;
+        gap: 1rem;
+        .append {
+            padding-inline: 3rem;
+            padding-bottom: 4px;
+            border: solid 2px black;
+            border-radius: 10rem;
+        }
+        .input {
+            display: grid;
+            row-gap: .5rem;
+            select.reactant {
+                text-align: center;
+                border: solid 2px black;
+            }
+            input[type="number"] {
+                width: 100px;
+                text-align: right;
+                border: solid 2px black;
+            }
+            select.unit {
+                border: solid 2px black;
+                option {
+                    text-align: center;
+                }
+            }
+        }
+        .reaction_type_container {
+            .reaction_type {
+                border: solid 2px black;
+            }
+        }
+        .button {
+            padding-inline: 3rem;
+            border: solid 2px black;
+            border-radius: 100vh;
+            padding-bottom: 4px;
+        }
+        .quit {
+            position: absolute;
+            top: .2rem;
+            left: 1rem;
+        }
+    }
+    .questions {
+        display: none;
+        justify-items: center;
+        .quit {
+            position: absolute;
+            top: .2rem;
+            left: 1rem;
+        }
+        .question {
+            line-height: 1.7;
+            input[type=text] {
+                border: solid 2px black;
+                width: 9rem;
+                text-align: center;
+            }
+            input:focus {
+                outline-color: red;
+            }
+            input.correct {
+                color: #0f0;
+            }
+            input.wrong {
+                color: red;
+            }
+        }
+        .check_next {
+            .check {
+                padding-inline: 3rem;
+                border: solid 2px black;
+                border-radius: 100vh;
+                padding-bottom: 4px;
+            }
+            .next {
+                display: none;
+                padding-inline: 3rem;
+                border: solid 2px black;
+                border-radius: 100vh;
+                padding-bottom: 4px;
+            }
+        }
+    }
+}
+</style>
+</head>
+<body>
+    <div class="container home">
+        <div class="to_simulator" onclick="change(0, 1)">シミュレーション</div>
+        <div class="to_questions" onclick="change(0, 2); ask()">問題を解く</div>
+    </div>
+    <div class="container simulator">
+        <div class="quit" id="quit1" onclick="change(1, 0)">✕</div>
+        <div class="append">欄を追加</div>
+        <div class="input">
+        </div>
+        <div class="reaction_type_container">
+            <span>反応の種類：</span>
+            <select name="reaction_type" id="reaction_type" class="reaction_type"></select>
+        </div>
+        <div class="button">反応させる</div>
+        <div class="output">
+            <div class="label_result">〈結果〉</div>
+        </div>
+    </div>
+    <div class="container questions">
+        <div class="quit" id="quit2" onclick="change(2, 0)">✕</div>
+        <div class="question"></div>
+        <div class="check_next">
+            <div class="check">CHECK!</div>
+            <div class="next">NEXT!</div>
+        </div>
+    </div>
+<script>
+const container_html = document.querySelectorAll('.container');
+const append_html = document.querySelector('.append');
+const input_html = document.querySelector('.input');
+let reactant_html = document.querySelectorAll('.reactant');
+let amount_html = document.querySelectorAll('.amount');
+let unit_html = document.querySelectorAll('.unit');
+const reaction_type_html = document.getElementById('reaction_type');
+const button_html = document.querySelector('.button');
+const output_html = document.querySelector('.output');
+const question_html = document.querySelector('.question');
+const check_html = document.querySelector('.check');
+const next_html = document.querySelector('.next');
+function define() {
+    reactant_html = document.querySelectorAll('.reactant');
+    amount_html = document.querySelectorAll('.amount');
+    unit_html = document.querySelectorAll('.unit');
+}
+const form_number = 2;
+
+function change(num1, num2) {
+    container_html[num1].style.display = 'none';
+    container_html[num2].style.display = 'grid';
+}
+change(1, 0);
+change(2, 0);
+
+function randomChoice(array) {
+    let r = Math.floor(Math.random() * array.length);
+    return array[r];
+}
+
+function min(arr) {
+    if (arr.length == 0) return 0;
+    let minimum = arr[0];
+    arr.forEach(e => {if (e <  minimum) minimum = e});
+    return minimum;
+}
+
+function max(arr) {
+    if (arr.length == 0) return 0;
+    let maximum = arr[0];
+    arr.forEach(e => {if (e >  maximum) maximum = e});
+    return maximum;
+}
+</script>
+    <script src="data_molecule.js"></script>
+    <script src="data_reaction.js"></script>
+    <script src="process_data.js"></script>
+    <script src="simulate.js"></script>
+    <script src="ask.js"></script>
+</body>
+</html>
