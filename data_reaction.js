@@ -22,7 +22,7 @@ Fe	3	CuO	2		Fe3O4	1	Cu	2				加熱
 Fe	1	CuO	1		FeO	1	Cu	1				加熱２
 C	1	S	2		CS2	1						加熱
 NH4Cl	1	BaOH2	1		NH3	2	BaCl2	1	H2O	2		加熱
-NH3	4	O2	5		NO	4	H2O	6				加熱（触媒）２
+NH3	4	O2	5		NO	4	H2O	6				加熱（触媒）
 Al	2	H2SO4	6		Al2(SO4)3	1	SO2	3	H2O	6		加熱(濃)
 Ba(OH)2	1	H2SO4	1		BaSO4	1	H2O	2				混合
 CaCO3	1	HCl	2		CaCl2	1	H2O	1	CO2	1		混合
@@ -82,4 +82,5 @@ H2S	2	O2	3		SO2	2	H2O	2				燃焼
 Zn	2	O2	1		ZnO	2						燃焼
 Mg	3	N2	1		Mg3N2	1						燃焼
 C	2	O2	1		CO	2						燃焼２`;
+
 
