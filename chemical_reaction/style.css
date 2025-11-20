@@ -94,6 +94,7 @@ body {
                 border: solid 2px black;
                 border-radius: 5px;
                 padding-bottom: 4px;
+                width: fit-content;
             }
             .hint_text {
                 display: none;
@@ -212,3 +213,4 @@ body {
         }
     }
 }
+
