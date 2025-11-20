@@ -380,11 +380,13 @@ function to_mistakes() {
         box.appendChild(ans);
         mistakes_html.appendChild(box);
     }
+    result_html.style.display = 'none';
     mistakes_html.style.display = 'grid';
 }
 
 function erase_mistakes() {
     mistakes_html.style.display = 'none';
+    result_html.style.display = 'grid';
 }
 
 function to_home() {
@@ -395,11 +397,13 @@ function to_home() {
 }
 
 function to_list() {
+    select_html.style.display = 'none';
     list_html.style.display = 'grid';
 }
 
 function erase_list() {
     list_html.style.display = 'none';
+    select_html.style.display = 'grid';
 }
 
 function shuffle_switch() {
