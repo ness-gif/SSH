@@ -201,16 +201,16 @@ function load() {
                     {
                         title: '2年2学期期末考査範囲 後半',
                         begin: 10,
-                        end: 18,
-                        number: 9,
+                        end: 20,
+                        number: 11,
                         accuracy: undefined,
                         best_rate: 0
                     },
                     {
                         title: '2年2学期期末考査範囲 全範囲',
                         begin: 0,
-                        end: 18,
-                        number: 19,
+                        end: 20,
+                        number: 21,
                         accuracy: undefined,
                         best_rate: 0
                     }
