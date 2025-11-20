@@ -51,7 +51,7 @@ function ask() {
     hint_text_html.classList.remove('visible');
     let type = randomChoice(Object.keys(data_reaction));
     let reaction = JSON.parse(JSON.stringify(randomChoice(data_reaction[type])));
-    const constant_reaction = JSON.parse(JSON.stringify(randomChoice(data_reaction[type])));
+    const constant_reaction = JSON.parse(JSON.stringify(reaction));
     let hint_text = generateHint(constant_reaction, false);
     hint_text_html.innerHTML = hint_text;
     let significantDigit = Math.floor(Math.random() * 2) + 1;
@@ -338,3 +338,4 @@ next_html.addEventListener('click', ask);
 document.addEventListener('keydown', event => {
     if (event.key == 'Enter' && container_html[2].style.display != 'none') asking ? check() : ask();
 });
+
