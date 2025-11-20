@@ -35,7 +35,11 @@ let dataText_japaneseHistory1 = `1律令制に基づき、国府が設置され�
 承久の乱後に増加した所領訴訟を分担処理するために作られた機関の名前は何？
 引付衆
 800年前に描かれた日本最高峰の軍記物語は何？
-平家物語`
+平家物語
+日本で最初の貨幣とされているものは何？
+和同開珎
+唐を参考にして作った日本で最初の本格的な律令は何？
+大宝律令`
 
 let step1_japaneseHistory1 = dataText_japaneseHistory1.split('\n');
 
