@@ -1,0 +1,214 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.5rem;
+    background: transparent;
+}
+
+:root {
+    font-size: 16px;
+}
+
+body {
+    padding: 1rem;
+    min-height: calc(100vh - 2rem);
+    display: grid;
+    place-items: center;
+    .home {
+        /* display: none; */
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        div {
+            margin: .75rem;
+            padding-inline: 2rem;
+            padding-bottom: .2rem;
+            border: solid 2px black;
+            width: min(calc(100vw - 1rem), 200px);
+            text-align: center;
+            border-radius: 5px;
+        }
+    }
+    .simulator {
+        text-align: center;
+        /* display: grid; */
+        display: none;
+        justify-items: center;
+        gap: 1rem;
+        .append {
+            padding-inline: 3rem;
+            padding-bottom: 4px;
+            border: solid 2px black;
+            border-radius: 10rem;
+        }
+        .input {
+            display: grid;
+            row-gap: .5rem;
+            select.reactant {
+                text-align: center;
+                border: solid 2px black;
+            }
+            input[type="number"] {
+                width: 100px;
+                text-align: right;
+                border: solid 2px black;
+            }
+            select.unit {
+                border: solid 2px black;
+                option {
+                    text-align: center;
+                }
+            }
+        }
+        .reaction_type_container {
+            .reaction_type {
+                border: solid 2px black;
+            }
+        }
+        .button {
+            padding-inline: 3rem;
+            border: solid 2px black;
+            border-radius: 100vh;
+            padding-bottom: 4px;
+        }
+        .quit {
+            position: absolute;
+            top: .2rem;
+            left: 1rem;
+        }
+    }
+    .questions {
+        display: none;
+        justify-items: center;
+        .quit {
+            position: absolute;
+            top: .2rem;
+            left: 1rem;
+        }
+        .hint {
+            margin-bottom: .5rem;
+            .hint_label {
+                text-align: center;
+                padding-inline: 1rem;
+                border: solid 2px black;
+                border-radius: 5px;
+                padding-bottom: 4px;
+            }
+            .hint_text {
+                display: none;
+            }
+            .hint_text.visible {
+                display: block;
+            }
+        }
+        .question {
+            line-height: 1.7;
+            input[type=text] {
+                border: solid 2px black;
+                width: 5rem;
+                text-align: center;
+                border-radius: 5px;
+            }
+            input:focus {
+                outline-color: red;
+            }
+            input.correct {
+                color: #0f0;
+            }
+            input.wrong {
+                color: red;
+            }
+        }
+        .check_next {
+            margin-top: .5rem;
+            display: grid;
+            grid-template-rows: auto auto auto;
+            justify-items: center  ;
+            gap: .5rem;
+            .button {
+                text-align: center;
+                padding-inline: 1rem;
+                border: solid 2px black;
+                border-radius: 5px;
+                padding-bottom: 4px;
+                width: fit-content;
+            }
+            .key {
+                display: none;
+                justify-items: center;
+                .key_content {
+                    display: none;
+                    justify-items: center;
+                    word-break: keep-all;
+                    font-size: 1rem;
+                    * {
+                        text-align: center;
+                        font-size: 1rem;
+                    }
+                    table {
+                        margin: .5rem;
+                        tbody {
+                            tr {
+                                td {
+                                    padding-inline: .5rem;
+                                }
+                                td.include_arrow {
+                                    position: relative;
+                                    height: 50px;
+                                    .arrow_container {
+                                        position: absolute;
+                                        top: 0;
+                                        left: 50%;
+                                        translate: -50% 0;
+                                        .arrowDown {
+                                            width: 2px;
+                                            height: 50px;
+                                            background-color: black;
+                                            position: relative;
+                                            border-radius: 1px;
+                                        }
+                                        .arrowDown::before {
+                                            content: '';
+                                            width: 10px;
+                                            height: 2px;
+                                            background-color: black;
+                                            position: absolute;
+                                            bottom: 3px;
+                                            right: -1px;
+                                            rotate: 45deg;
+                                            border-radius: 1px;
+                                        }
+                                        .arrowDown::after {
+                                            content: '';
+                                            width: 10px;
+                                            height: 2px;
+                                            background-color: black;
+                                            position: absolute;
+                                            bottom: 3px;
+                                            left: -1px;
+                                            rotate: 135deg;
+                                            border-radius: 1px;
+                                        }
+                                    }
+                                    .molecule_value {
+                                        position: absolute;
+                                        top: 50%;
+                                        left: calc(50% + 3px);
+                                        translate: 0 -50%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .key_content.visible {
+                    display: grid;
+                }
+            }
+            .next {
+                display: none;
+            }
+        }
+    }
+}
