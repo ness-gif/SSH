@@ -51,7 +51,8 @@ function ask() {
     hint_text_html.classList.remove('visible');
     let type = randomChoice(Object.keys(data_reaction));
     let reaction = JSON.parse(JSON.stringify(randomChoice(data_reaction[type])));
-    let hint_text = generateHint(reaction, false);
+    const constant_reaction = JSON.parse(JSON.stringify(randomChoice(data_reaction[type])));
+    let hint_text = generateHint(constant_reaction, false);
     hint_text_html.innerHTML = hint_text;
     let significantDigit = Math.floor(Math.random() * 2) + 1;
     let digit = Math.floor(Math.random() * 4) - 2;
@@ -90,7 +91,7 @@ function ask() {
 
     question_type_number = randInt(0, questions.length - 1);
     question_html.innerHTML = questions[question_type_number]();
-    let explanation_text = generateExplanation(reaction, list);
+    let explanation_text = generateExplanation(constant_reaction, list);
     key_content_html.innerHTML = explanation_text;
     // document.querySelector('.reply_box').focus();
     check_html.style.display = 'block';
@@ -136,43 +137,6 @@ function generateHint(reaction, ifExplanation) {
 function generateExplanation(reaction, list) {
     let text = '';
     if (question_type_number == 0) {
-        // text = `
-        //     <div>2Al + 3H2SO4 <wbr>→ Al2(SO4)3 + 3H2</div>
-        //     <div>Alについて、<wbr>1.5 ÷ 2 = 0.75</div>
-        //     <div>H2SO4について、<wbr>1.5 ÷ 3 = 0.50</div>
-        //     <div>0.50 が最も小さいから、<wbr>H2SO4を<wbr>基準とする。</div>
-        //     <table>
-        //         <tr>
-        //             <td>2Al</td>
-        //             <td>3H2SO4</td>
-        //             <td>→</td>
-        //             <td>Al2(SO4)3</td>
-        //             <td>3H2</td>
-        //         </tr>
-        //         <tr>
-        //             <td>1.5mol</td>
-        //             <td>1.5mol</td>
-        //             <td></td>
-        //             <td>0mol</td>
-        //             <td>0mol</td>
-        //         </tr>
-        //         <tr>
-        //             <td class="include_arrow"><div class="arrow_container"><div class="arrowDown"></div></div><div class="molecule_value">-1.0</div></td>
-        //             <td class="include_arrow"><div class="arrow_container"><div class="arrowDown"></div></div><div class="molecule_value">-1.5</div></td>
-        //             <td class="include_arrow"></td>
-        //             <td class="include_arrow"><div class="arrow_container"><div class="arrowDown"></div></div><div class="molecule_value">+0.50</div></td>
-        //             <td class="include_arrow"><div class="arrow_container"><div class="arrowDown"></div></div><div class="molecule_value">+1.5</div></td>
-        //         </tr>
-        //         <tr>
-        //             <td>0.50mol</td>
-        //             <td>0mol</td>
-        //             <td></td>
-        //             <td>0.50mol</td>
-        //             <td>1.5mol</td>
-        //         </tr>
-        //     </table>
-        //     <div>よって <wbr>Al2(SO4)3 が <wbr>0.50mol 、 <wbr>H2 が <wbr>1.5mol <wbr>生成され、 <wbr>Al が <wbr>0.50mol <wbr>余る。</div>
-        // `;
         let text_standarts = '';
         if (reaction.reactant.length > 1) {
             text_standarts += `<div>${generateHint(reaction, true)}</div>`;
