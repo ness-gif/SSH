@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM GYM created by MIKS</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+<style>
+* {
+    font-family: "Noto Sans JP", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    font-size: 16px;
+}
+
+sub {
+    font-size: 1rem;
+}
+
+body {
+    font-size: 1.5rem;
+    height: 100vh;
+    main {
+        height: 100%;
+        position: relative;
+        display: grid;
+        justify-items: center;
+        .waiting {
+            opacity: 1;
+            position: absolute;
+            inset: 0;
+            background-color: #17A398;
+            color: white;
+            z-index: 1;
+            display: grid;
+            gap: 1rem;
+            text-align: center;
+            align-content: center;
+            justify-items: center;
+            .logo {
+                .tag {
+                    color: #ffff00;
+                }
+            }
+            .button {
+                background-color: white;
+                color: #17A398;
+                width: fit-content;
+                padding-inline: .5rem;
+                border-radius: 5px;
+            }
+        }
+        .waiting.hidden {
+            opacity: 0;
+            transition: opacity .1s ease;
+        }
+        .waiting.none {
+            display: none;
+        }
+        .work_area {
+            width: min(800px, calc(100vw - 2rem));
+            height: 100%;
+            display: grid;
+            align-content: center;
+            gap: 1rem;
+            .preposition {
+                .formula {
+                    text-align: center;
+                }
+            }
+            .subquestion {
+                input.answer_input {
+                    width: 5rem;
+                    font-size: 1.5rem;
+                    text-align: center;
+                }
+            }
+            .buttons {
+                display: grid;
+                grid-template-columns: auto auto;
+                justify-content: center;
+                gap: 1rem;
+                .button {
+                    padding-inline: 1rem;
+                    border: solid 2px black;
+                    border-radius: 5px;
+                }
+                .next.none {
+                    display: none;
+                }
+            }
+            .correct_sign {
+                opacity: 0;
+                position: absolute;
+                inset: 0;
+                display: none;
+                place-items: center;
+                .circle {
+                    width: min(50vw, 50vh);
+                    aspect-ratio: 1 / 1;
+                    border-radius: min(50vw, 50vh);
+                    border: solid 3rem red;
+                }
+            }
+            .correct_sign.appear {
+                display: grid;
+            }
+            .correct_sign.visible {
+                opacity: 1;
+                transition: opacity .1s ease;
+            }
+            .wrong_sign {
+                opacity: 0;
+                position: absolute;
+                inset: 0;
+                display: none;
+                place-items: center;
+                .cross {
+                    position: relative;
+                }
+                .cross::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    translate: -50% -50%;
+                    height: 3rem;
+                    width: calc((min(50vw, 50vh) + 6rem) * 1.41421356);
+                    background-color: #0000ff;
+                    rotate: 45deg;
+                }
+                .cross::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    translate: -50% -50%;
+                    height: 3rem;
+                    width: calc((min(50vw, 50vh) + 6rem) * 1.41421356);
+                    background-color: #0000ff;
+                    rotate: 135deg;
+                }
+            }
+            .wrong_sign.appear {
+                display: grid;
+            }
+            .wrong_sign.visible {
+                opacity: 1;
+                transition: opacity .1s ease;
+            }
+        }
+        .result {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background-color: white;
+            display: none;
+            text-align: center;
+            align-content: center;
+            justify-items: center;
+            gap: 1rem;
+            .restart {
+                padding-inline: 1rem;
+                border: solid 2px black;
+                border-radius: 5px;
+                width: fit-content;
+            }
+        }
+        .result.appear {
+            display: grid;
+        }
+    }
+}
+
+</style>
+</head>
+<body>
+    <main>
+        <div class="waiting">
+            <div class="logo">
+                <div class="original">STEM GYM created by MIKS</div>
+                <div class="tag">＜実験用モード＞</div>
+            </div>
+            <div class="description">化学反応の量的関係<br>全４問</div>
+            <div class="button" onclick="start()">始める</div>
+        </div>
+        <div class="work_area">
+            <div class="preposition">
+                エチレンC<sub>2</sub>H<sub>4</sub>の気体を完全に燃焼させると、二酸化炭素と水を生じた。この反応は次の化学反応式であらわされる。
+                <div class="formula">C<sub>2</sub>H<sub>4</sub> + 3O<sub>2</sub> → 2CO<sub>2</sub> + 2H<sub>2</sub>O</div>
+                気体の体積はすべて標準状態のものとして、次の問いに答えよ。
+            </div>
+            <div class="subquestion"></div>
+            <div class="buttons">
+                <div class="button check" onclick="check()">回答する</div>
+                <div class="button next none" onclick="next()">次に進む</div>
+            </div>
+            <div class="correct_sign">
+                <div class="circle"></div>
+            </div>
+            <div class="wrong_sign">
+                <div class="cross"></div>
+            </div>
+        </div>
+        <div class="result">
+            <div class="label">終了</div>
+            <div class="clear_time">回答時間：<span class="time"></span>s</div>
+            <div class="restart" onclick="restart()">開始画面に戻る</div>
+        </div>
+    </main>
+<script>
+const answers = [
+    ["18", "22.4"],
+    ["33.6", "144"],
+    ["9"],
+    ["84"]
+];
+
+const question_texts = [
+    `（１）標準状態で11.2Ⅼのエチレンを完全に燃焼させると、水は${box(0, 0)}ｇ、二酸化炭素は${box(0, 1)}Ⅼ生成される。`,
+    `（２）二酸化炭素が132ｇ発生したとき、燃焼したエチレンは${box(1, 0)}Ｌ。また、酸素は${box(1, 1)}ｇ使われた。`,
+    `（３）エチレン5Ｌと酸素12Ｌを混合して完全燃焼させると、反応後の混合気体は${box(2, 0)}Ｌである。（生じた水はすべて液体とする。）`,
+    `（４）エチレン5.6Ｌを完全に燃焼させるには、標準状態で空気は${box(3, 0)}Ｌ必要である。（空気の体積構成を窒素80％、酸素20％とする。）`
+];
+
+const waiting_html = document.querySelector('.waiting');
+const subquestion_html = document.querySelector('.subquestion');
+const next_html = document.querySelector('.next');
+const correct_sign_html = document.querySelector('.correct_sign');
+const wrong_sign_html = document.querySelector('.wrong_sign');
+const result_html = document.querySelector('.result');
+    const time_html = document.querySelector('.time');
+
+let question_number = 0;
+let intervalId;
+let time = 0;
+
+function box(num1, num2) {
+    let html_text = `<input class="answer_input" type="number" name="${num1},${num2}" id="${num1},${num2}">`;
+    return html_text;
+}
+
+function start() {
+    waiting_html.classList.add('hidden');
+    setTimeout(() => {
+        waiting_html.classList.add('none');
+    }, 100);
+    question_number = 0;
+    time = 0;
+    intervalId = setInterval(() => {time += 0.01}, 10);
+    ask();
+}
+
+function ask() {
+    subquestion_html.innerHTML = question_texts[question_number];
+    question_number++;
+}
+
+function check() {
+    let answers_html = document.querySelectorAll('.answer_input');
+    let correct = true;
+    answers_html.forEach(element => {
+        let id = element.id.split(',');
+        let num1 = Number(id[0]);
+        let num2 = Number(id[1]);
+        if (element.value == answers[num1][num2]) {
+            element.style.color = '#00ff00';
+        } else {
+            element.style.color = '#ff0000';
+            correct = false;
+        }
+    });
+    if (correct) {
+        correct_sign_html.classList.add('appear');
+        setTimeout(() => {
+            correct_sign_html.classList.add('visible');
+        }, 1);
+        setTimeout(() => {
+            correct_sign_html.classList.remove('appear');
+            correct_sign_html.classList.remove('visible');
+        }, 1000);
+    } else {
+        wrong_sign_html.classList.add('appear');
+        setTimeout(() => {
+            wrong_sign_html.classList.add('visible');
+        }, 1);
+        setTimeout(() => {
+            wrong_sign_html.classList.remove('appear');
+            wrong_sign_html.classList.remove('visible');
+        }, 1000);
+    }
+    next_html.classList.remove('none');
+}
+
+function next() {
+    correct_sign_html.classList.remove('appear');
+    correct_sign_html.classList.remove('visible');
+    wrong_sign_html.classList.remove('appear');
+    wrong_sign_html.classList.remove('visible');
+    next_html.classList.add('none');
+    if (question_number < question_texts.length) {
+        ask();
+    } else {
+        clearInterval(intervalId);
+        time_html.innerHTML = to_time(time);
+        result_html.classList.add('appear');
+    }
+}
+
+function to_time(num) {
+    if (num < 60) {
+        return Math.floor(num * 100) / 100;
+    } else if (num >= 60) {
+        let minite = Math.floor(num / 60);
+        let second = Math.floor((num % 60) * 100) / 100;
+        return `${minite}:${second < 10 ? '0' : ''}${second}`;
+    }
+}
+
+function restart() {
+    result_html.classList.remove('appear');
+    waiting_html.classList.remove('none');
+    waiting_html.classList.remove('hidden');
+}
+
+</script>
+</body>
+</html>
